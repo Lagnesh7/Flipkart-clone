@@ -1,0 +1,273 @@
+{
+  "info": {
+    "name": "E-commerce API",
+    "description": "API collection for e-commerce backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/register",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "auth", "register"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"phone\": \"9876543210\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/login",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "auth", "login"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@test.com\",\n  \"password\": \"test123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Check User Auth",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/user-auth",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "auth", "user-auth"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "your_token_here"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/product",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "product"]
+            }
+          }
+        },
+        {
+          "name": "Get Filtered Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/product/filtered-products?category=Electronics&priceRange=[0,100000]&ratings=4",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "product", "filtered-products"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Electronics"
+                },
+                {
+                  "key": "priceRange",
+                  "value": "[0,100000]"
+                },
+                {
+                  "key": "ratings",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/product/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "product", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/product",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "product"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "admin_token_here"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"iPhone 14\",\n  \"description\": \"Latest Apple iPhone\",\n  \"price\": 99999,\n  \"discountPrice\": 89999,\n  \"stock\": 50,\n  \"category\": \"Electronics\",\n  \"brand\": \"Apple\",\n  \"seller\": \"Flipkart\",\n  \"images\": [\"https://example.com/iphone14.jpg\"]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Get User Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "order"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "user_token_here"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Create Checkout Session",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/order/create-checkout-session",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "order", "create-checkout-session"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "user_token_here"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"productId\": 1,\n      \"name\": \"iPhone 13\",\n      \"price\": 79999,\n      \"discountPrice\": 69999,\n      \"quantity\": 1,\n      \"image\": \"https://example.com/iphone13.jpg\",\n      \"brandName\": \"Apple\"\n    }\n  ],\n  \"frontendURL\": \"http://localhost:5173\",\n  \"customerEmail\": \"john@example.com\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wishlist",
+      "item": [
+        {
+          "name": "Get Wishlist",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/wishlist",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "wishlist"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "user_token_here"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Add to Wishlist",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/wishlist",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "wishlist"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "user_token_here"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": 5\n}"
+            }
+          }
+        },
+        {
+          "name": "Remove from Wishlist",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/wishlist/5",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "v1", "wishlist", "5"]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "user_token_here"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
